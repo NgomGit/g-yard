@@ -1,0 +1,125 @@
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Nouvel enregistrement</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+        <div class="mb-3">
+            <label for="firstname">Prénom</label>
+            <div class="input-group">
+              <input id="firstname" required  ngModel #firstname="ngModel" class="form-control"
+                      placeholder="Nom complet" 
+                      name="firstname" >
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="lastname">Nom </label>
+            <div class="input-group">
+              <input id="lastname" ngModel #lastname="ngModel"  required class="form-control"
+                      placeholder="Nom" 
+                      name="lastname">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="dateOfBirth">Date de naissance</label>
+            <div class="input-group">
+              <input id="dateOfBirth" ngModel #dateOfBirth="ngModel" required class="form-control"
+                      placeholder="yyyy-mm-dd" 
+                      name="dateOfBirth" ngbDatepicker #dp_dateOfBirth="ngbDatepicker">
+              <button class="btn btn-outline-secondary calendar" (click)="dp_dateOfBirth.toggle()" type="button"></button>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="placeOfBirth">Lieu de naissance </label>
+            <div class="input-group">
+              <input id="placeOfBirth" required ngModel #placeOfBirth="ngModel" class="form-control"
+                      placeholder="Lieu de naissance" 
+                      name="placeOfBirth">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="dateOfDeath">Date de déces</label>
+            <div class="input-group">
+              <input id="dateOfDeath" required  ngModel #dateOfDeath="ngModel" class="form-control"
+                      placeholder="yyyy-mm-dd" 
+                      name="dateOfDeath" ngbDatepicker #dp_dateOfDeath="ngbDatepicker">
+              <button class="btn btn-outline-secondary calendar" (click)="dp_dateOfDeath.toggle()" type="button"></button>
+            </div>
+          </div>
+
+
+          <div class="mb-3">
+            <label for="placeOfDeath">Lieu de déces </label>
+            <div class="input-group">
+              <input id="placeOfDeath"  required  ngModel #placeOfDeath="ngModel" class="form-control"
+                      placeholder="Lieu de déces" 
+                      name="placeOfDeath">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="burialDate">Date d'enterrement</label>
+            <div class="input-group">
+              <input id="burialDate" required  ngModel #burialDate="ngModel" class="form-control"
+                      placeholder="yyyy-mm-dd" 
+                      name="burialDate" ngbDatepicker #dp_burialDate="ngbDatepicker">
+              <button class="btn btn-outline-secondary calendar" (click)="dp_burialDate.toggle()" type="button"></button>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="recordDate">Date d'enregistrement</label>
+            <div class="input-group">
+              <input id="recordDate" required  ngModel #recordDate="ngModel" class="form-control"
+                      placeholder="yyyy-mm-dd" 
+                      name="recordDate" ngbDatepicker #dp_recordDate="ngbDatepicker">
+              <button class="btn btn-outline-secondary calendar" (click)="dp_recordDate.toggle()" type="button"></button>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="sectionNumber">Numéro section</label>
+            <div class="input-group">
+              <input id="sectionNumber" required  ngModel #sectionNumber="ngModel" class="form-control"
+                      placeholder="3" 
+                      name="sectionNumber">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="sectionNumber">Numéro série</label>
+            <div class="input-group">
+              <input id="serialNumber" required ngModel #serialNumber="ngModel"  class="form-control"
+                      placeholder="3" 
+                      name="serialNumber">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="graveNumber">Numéro tombe</label>
+            <div class="input-group">
+              <input id="graveNumber"  required ngModel #graveNumber="ngModel" class="form-control"
+                      placeholder="3" 
+                      name="graveNumber">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-sm btn-outline-dark">Enregistrer</button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+    </div>
+  </ng-template>
+  
+  <button class="btn btn-outline-primary" id="new-record" (click)="open(content)">Créer un enregistrement</button>
+  
+  <hr>
+  
+  <pre>{{ closeResult }}</pre>

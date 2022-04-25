@@ -1,0 +1,158 @@
+
+<div></div>
+
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Details</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body inline">
+
+        <div class="item">
+            <p>Prénom</p>
+            <h6> {{death.firstname}}</h6>
+        </div>
+
+        <div class="item">
+            <p>Nom</p>
+            <h6> {{death.lastname}}</h6>
+        </div>
+
+        <div class="item">
+            <p>Date de naissance</p>
+            <h6> {{death.dateOfBirth}}</h6>
+        </div>
+        <div class="item">
+            <p>Lieu de naissance</p>
+            <h6> {{death.placeOfBirth}}</h6>
+        </div>
+
+        <div class="item">
+            <p>Date déces</p>
+            <h6> {{death.dateOfDeath}}</h6>
+        </div>
+
+        <div class="item">
+            <p>Lieu de déces</p>
+            <h6> {{death.placeOfDeath}}</h6>
+        </div>
+
+        <div class="item">
+            <p>Date d'enterrement</p>
+            <h6> {{death.burialDate}}</h6>
+        </div>
+
+        <div class="item">
+            <p>Numéro section</p>
+            <h6> {{death.sectionNumber}}</h6>
+        </div>
+
+        <div class="item">
+            <p>Numéro série</p>
+            <h6> {{death.serialNumber}}</h6>
+        </div>
+
+        <div class="item">
+            <p>Numéro tombe</p>
+            <h6> {{death.graveNumber}}</h6>
+        </div>
+      
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
+
+<!-- <button class="btn btn-outline-primary mb-2 me-2" (click)="openVerticallyCentered(content)">
+</button> -->
+<app-modal-basic death="death"></app-modal-basic>
+<form>
+  <div class="mb-3 row">
+    <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label"> Faire une recherche</label>
+    <div class="col-xs-6 col-sm-auto col-lg-4">
+      <input id="table-complete-search" type="text" class="form-control" name="searchTerm" [(ngModel)]="service.searchTerm">
+    </div>
+    <span class="col col-form-label" *ngIf="service.loading$ | async">Loading...</span>
+  </div>
+
+ 
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Prénom</th>
+      <th scope="col" >Nom</th>
+      <th scope="col" >Date de naissance</th>
+      <th scope="col" >Lieu de naissance</th>
+      <th scope="col" >Date de déces</th>
+      <th scope="col" >Lieu de déces</th>
+      <th scope="col" >Date d'enterrement</th>
+      <th scope="col" >Date d'enregistrement</th>
+      <th scope="col" >Numéro section</th>
+      <th scope="col" >Numéro série</th>
+      <th scope="col" >Numéro tombe</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let death of deaths" (click)="handleClickEvent(death, content)">
+      <th scope="row">{{ death.id }}</th>
+      <td>
+        <ngb-highlight [result]="death.firstname" [term]="service.searchTerm"></ngb-highlight>
+      </td>
+      <td><ngb-highlight [result]="death.lastname " [term]="service.searchTerm"></ngb-highlight></td>
+      <td><ngb-highlight 
+            [result]="death.dateOfBirth" 
+            [term]="service.searchTerm"></ngb-highlight></td>
+      <td><ngb-highlight [result]="death.placeOfBirth " [term]="service.searchTerm"></ngb-highlight></td>
+      <td><ngb-highlight [result]="death.dateOfDeath " [term]="service.searchTerm"></ngb-highlight></td>
+      <td><ngb-highlight [result]="death.placeOfDeath " [term]="service.searchTerm"></ngb-highlight></td>
+      <td><ngb-highlight [result]="death.recordDate " [term]="service.searchTerm"></ngb-highlight></td> 
+      <td><ngb-highlight [result]="death.burialDate " [term]="service.searchTerm"></ngb-highlight></td>
+      
+      <td><ngb-highlight [result]="death.sectionNumber | number" [term]="service.searchTerm"></ngb-highlight></td>
+      <td><ngb-highlight [result]="death.serialNumber | number" [term]="service.searchTerm"></ngb-highlight></td>
+      <td><ngb-highlight [result]="death.graveNumber | number" [term]="service.searchTerm"></ngb-highlight></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between p-2">
+    <!-- <ngb-pagination
+      [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+    </ngb-pagination> -->
+
+    <!-- <select class="form-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+      <option [ngValue]="2">2 items per page</option>
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+    </select> -->
+  </div>
+
+
+  <!-- <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" sortable="name" (sort)="onSort($event)">Country</th>
+      <th scope="col" sortable="area" (sort)="onSort($event)">Area</th>
+      <th scope="col" sortable="population" (sort)="onSort($event)">Population</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let country of countries$ | async">
+      <th scope="row">{{ country.id }}</th>
+      <td>
+        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="me-2" style="width: 20px">
+        <ngb-highlight [result]="country.name" [term]="service.searchTerm"></ngb-highlight>
+      </td>
+      <td><ngb-highlight [result]="country.area | number" [term]="service.searchTerm"></ngb-highlight></td>
+      <td><ngb-highlight [result]="country.population | number" [term]="service.searchTerm"></ngb-highlight></td>
+    </tr>
+    </tbody>
+  </table> -->
+
+</form>
