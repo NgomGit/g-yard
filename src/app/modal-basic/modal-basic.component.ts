@@ -52,7 +52,10 @@ export class ModalBasicComponent implements OnInit{
         let valueToSend = JSON.stringify(this.death)
         console.log("Json stringfy ", valueToSend)
         this.service.setDeaths(valueToSend)
+        this.deaths.push(this.death)
+        window.location.reload()
         this.modalService.dismissAll()
+
       }
     }
   

@@ -8,6 +8,11 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SortableDirective } from './sortable.directive';
 import { ModalBasicComponent } from './modal-basic/modal-basic.component';
 import { AlerteClosableComponent } from './alerte-closable/alerte-closable.component';
+import  { } from '@angular/material';
+import { BrowserAnimationsModule } 
+       from '@angular/platform-browser/animations';
+import { NavbarComponent } from './navbar/navbar.component';
+
 
 @NgModule({
   declarations: [
@@ -15,7 +20,8 @@ import { AlerteClosableComponent } from './alerte-closable/alerte-closable.compo
     HomeComponent,
     SortableDirective,
     ModalBasicComponent,
-    AlerteClosableComponent
+    AlerteClosableComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

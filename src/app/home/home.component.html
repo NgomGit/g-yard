@@ -68,11 +68,14 @@
 
 <!-- <button class="btn btn-outline-primary mb-2 me-2" (click)="openVerticallyCentered(content)">
 </button> -->
+<a class="btn  btn-outline-success" id="export-data"  style="cursor: pointer" (click)="exportexcel()">
+   Exporter 
+</a>
 <app-modal-basic death="death"></app-modal-basic>
 <form>
-  <div class="mb-3 row">
+  <div class="mb-3 row" id="container-search">
     <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label"> Faire une recherche</label>
-    <div class="col-xs-6 col-sm-auto col-lg-4">
+    <div class="col-xs-6 col-sm-auto col-lg-4  col-md-12">
       <input id="table-complete-search" type="text" class="form-control" name="searchTerm" [(ngModel)]="service.searchTerm">
     </div>
     <span class="col col-form-label" *ngIf="service.loading$ | async">Loading...</span>
@@ -80,21 +83,21 @@
 
  
 
-  <table class="table table-striped">
+  <table class="table table-striped" id="excel-table">
     <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Prénom</th>
-      <th scope="col" >Nom</th>
-      <th scope="col" >Date de naissance</th>
-      <th scope="col" >Lieu de naissance</th>
-      <th scope="col" >Date de déces</th>
-      <th scope="col" >Lieu de déces</th>
-      <th scope="col" >Date d'enterrement</th>
-      <th scope="col" >Date d'enregistrement</th>
-      <th scope="col" >Numéro section</th>
-      <th scope="col" >Numéro série</th>
-      <th scope="col" >Numéro tombe</th>
+      <th scope="col"   sortable="firstname" (sort)="onSort($event)">Prénom</th>
+      <th scope="col"   sortable="lastname" (sort)="onSort($event)" >Nom</th>
+      <th scope="col"   sortable="dateOfBirth" (sort)="onSort($event)">Date de naissance</th>
+      <th scope="col"   sortable="placeOfBirth" (sort)="onSort($event)">Lieu de naissance</th>
+      <th scope="col"   sortable="dateOfDeath" (sort)="onSort($event)">Date de déces</th>
+      <th scope="col"   sortable="placeOfDeath" (sort)="onSort($event)">Lieu de déces</th>
+      <th scope="col"   sortable="burialDate" (sort)="onSort($event)">Date d'enterrement</th>
+      <th scope="col"   sortable="recordDate" (sort)="onSort($event)">Date d'enregistrement</th>
+      <th scope="col"   sortable="sectionNumber" (sort)="onSort($event)">Numéro section</th>
+      <th scope="col"   sortable="serialNumber" (sort)="onSort($event)">Numéro série</th>
+      <th scope="col"   sortable="graveNumber" (sort)="onSort($event)">Numéro tombe</th>
     </tr>
     </thead>
     <tbody>

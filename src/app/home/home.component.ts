@@ -8,6 +8,7 @@ import {YardService} from '../yard.service';
 import {NgbdSortableHeader, SortEvent} from '../sortable.directive';
 import { Death } from 'src/models/Death';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as XLSX from 'xlsx'; 
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   providers:[YardService, DecimalPipe]
 })
 export class HomeComponent implements OnInit {
+
+  /*name of the excel-file which will be downloaded. */ 
+  fileName= 'g-yard-data.xlsx'; 
 
   countries$: Observable<Country[]>;
   total$: Observable<number>;
@@ -67,5 +71,21 @@ export class HomeComponent implements OnInit {
   openVerticallyCentered(content) {
     this.modalService.open(content, { centered: true });
   }
+
+
+  exportexcel(): void 
+    {
+       /* table id is passed over here */   
+       let element = document.getElementById('excel-table'); 
+       const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+       /* generate workbook and add the worksheet */
+       const wb: XLSX.WorkBook = XLSX.utils.book_new();
+       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+       /* save to file */
+       XLSX.writeFile(wb, this.fileName);
+			
+    }
 
 }
